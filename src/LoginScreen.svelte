@@ -4,6 +4,13 @@
   import windows_xp_logo from "./assets/win_xp_logo.png";
   import prof_pic from "./assets/github_prof.png";
   import { navigate } from "svelte-routing";
+  import { Sound } from "svelte-sound";
+  import startup_mp3 from "./assets/startup_sound.mp3";
+  const startup_sound = new Sound(startup_mp3);
+  function navigateHome() {
+    startup_sound.play();
+    navigate("/home");
+  }
 </script>
 
 <!-- OVERLAY -->
@@ -26,7 +33,7 @@
       />
     </div>
     <!-- RIGHT SIDE -->
-    <button on:click={() => navigate("/home")}
+    <button on:click={navigateHome}
       ><div
         class="flex flex-row items-start from-[#00309C] w-[500px] h-[150px] bg-gradient-to-r rounded-lg p-6 hover:cursor-pointer"
       >

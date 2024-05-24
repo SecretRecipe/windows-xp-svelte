@@ -1,5 +1,13 @@
 <script>
   import windows_logo from "./assets/windows_xp.png";
+  import { onMount } from "svelte";
+  import { Router, Link, Route, navigate } from "svelte-routing";
+  onMount(() => {
+    console.log("nav");
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  });
 </script>
 
 <div class="w-screen h-screen bg-black flex justify-center items-center">
