@@ -6,6 +6,8 @@
   import { Sound } from "svelte-sound";
   import FileView from "./components/FileView.svelte";
   import { show } from "./stores";
+  import { hide } from "./stores";
+  import FileExplorerBar from "./components/FileExplorerBar.svelte";
   let clicked = false;
   const click_sound = new Sound(click_mp3);
 
@@ -18,6 +20,7 @@
   }
   function doubleClick() {
     click_sound.play();
+    hide.update((currentValue) => !currentValue);
     show.update((currentValue) => !currentValue);
   }
 </script>
@@ -28,24 +31,33 @@
     alt="Windows Background"
     class="w-full h-full object-cover"
   />
+  <!-- Footer -->
   <div
-    class="w-full absolute bottom-0 h-[40px] bg-gradient-to-b from-[#3168D5] to-[#4993E6] pt-[3px]"
+    class="absolute bottom-0 w-full h-[36px] bg-gradient-to-b from-[#3168D5] to-[#4993E6]"
   >
     <div
-      class="h-full w-full bg-gradient-to-b from-[#235CD9] to-[#2663E0]"
-    ></div>
-    <div class="styled-div">
-      <button
-        class="ml-2 h-9 w-9 mt-[2px] pb-[2px] px-1 rounded inline-flex items-center text-white italic font-semibold"
-        on:click={() => console.log("pressed on start")}
-      >
-        <img src={win_xp_logo} alt="Windows Logo" class="mr-2" />
-        Start
-      </button>
+      class="h-full w-full bg-gradient-to-b from-[#235CD9] to-[#2663E0] flex flex-row items-center"
+    >
+      <!-- Start Button -->
+      <div class="styled-div">
+        <button
+          class="ml-2 h-9 w-9 px-1 rounded inline-flex items-center text-white italic font-semibold"
+          on:click={() => console.log("pressed on start")}
+        >
+          <img
+            src={win_xp_logo}
+            alt="Windows Logo"
+            class="mr-2 w-6 h-6 object-contain"
+          />
+          start
+        </button>
+      </div>
+
+      <FileExplorerBar />
     </div>
   </div>
   <div
-    class="absolute bottom-0 right-0 h-[40px] w-24 bg-[#0F8EEA] flex items-center justify-end border-s-[1px]
+    class="absolute bottom-0 right-0 h-[36px] w-24 bg-[#0F8EEA] flex items-center justify-end border-s-[1px]
     border-black"
   >
     <p
@@ -73,12 +85,12 @@
   .styled-div {
     width: 110px;
     height: 100%;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     background: linear-gradient(to bottom right, #337634, #48ac48);
-    border-bottom-right-radius: 0.75rem; /* Adjust radius as per your need */
-    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 15px; /* Adjust radius as per your need */
+    border-top-right-radius: 0.45rem;
     transition: background 0.3s;
   }
   .styled-div:hover {
