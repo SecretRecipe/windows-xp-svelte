@@ -20,8 +20,8 @@
   }
   function doubleClick() {
     click_sound.play();
-    hide.update((currentValue) => !currentValue);
-    show.update((currentValue) => !currentValue);
+    hide.update((currentValue) => true);
+    show.update((currentValue) => true);
   }
 </script>
 

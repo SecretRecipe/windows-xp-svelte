@@ -1,23 +1,51 @@
 <script>
   import { show, hide } from "../stores";
-  import shell from "../assets/shell.png";
   import computer from "../assets/computer.png";
   import folder from "../assets/explorer.png";
   import { draggable } from "@neodrag/svelte";
   import logo from "../assets/win_xp_logo.png";
+  import arrow_left from "../assets/arrow_left.svg";
+  import arrow_down from "../assets/arrow_down.svg";
+  import arrow_right from "../assets/arrow_right.svg";
+  import search from "../assets/search.png";
+  import window from "../assets/window.svg";
 
+  let isSearchPressed = false;
+  let isFolderSelected = false;
+  let isMaximized = false;
+  let offsetX = 0;
+  let offsetY = 0;
+  let position = { x: 0, y: 0 };
+  function handleMaximizeClick() {
+    isMaximized = !isMaximized;
+    position.x = 0;
+    position.y = 0;
+  }
   function handleClick() {
     show.update((currentValue) => false);
     hide.update((currentValue) => false);
+  }
+  function handleSearchClick() {
+    isSearchPressed = !isSearchPressed;
+    console.log(isSearchPressed);
+  }
+  function handleFolderClick() {
+    isFolderSelected = !isFolderSelected;
   }
 </script>
 
 <!-- Show this DIV if user has double clicked on the Computer -->
 {#if $show && $hide}
   <div
-    use:draggable={{ bounds: "body" }}
-    class={`absolute top-[20%] left-[25%] w-[40%] h-[50%] bg-white border-4 border-[#235CD9]
-  rounded-t-lg ${show ? "block" : "hidden"}`}
+    use:draggable={{
+      bounds: "body",
+      position,
+      onDrag: ({ offsetX, offsetY }) => {
+        position = { x: offsetX, y: offsetY };
+      },
+    }}
+    class={`absolute  ${isMaximized ? "top-0 left-0 w-full h-full" : "top-[20%] left-[25%] w-[40%] h-[50%]"} bg-white border-4 border-[#235CD9]
+  rounded-t-lg flex flex-col`}
   >
     <div
       class="relative flex flex-row bg-gradient-to-b from-[#235CD9] to-[#2663E0] text-white text-sm h-7 justify-between"
@@ -30,16 +58,16 @@
 
       <div class="flex flex-row gap-[2px]">
         <button
-          on:click={() => show.update((currentValue) => !currentValue)}
+          on:click={() => hide.update((currentValue) => !currentValue)}
           class="styled-button-blue rounded-md flex flex-row items-center justify-center"
         >
           <p class="mx-1 text-md font-bold mb-1">_</p>
         </button>
         <button
-          on:click={() => show.update((currentValue) => !currentValue)}
+          on:click={handleMaximizeClick}
           class="styled-button-blue rounded-md flex flex-row items-center justify-center"
         >
-          <p class="mx-1 text-md font-bold">X</p>
+          <img src={window} alt="Maximize" class="h-full w-4" />
         </button>
         <button
           on:click={handleClick}
@@ -72,13 +100,76 @@
       class="w-full h-10 bg-[#EFECDE] flex flex-row justify-between border-b-[1px] border-[#E3DECB]"
     >
       <div class="h-full ml-2 flex flex-row items-center gap-2">
-        <p class="text-xs font-light">File</p>
-        <p class="text-xs font-light">Edit</p>
-        <p class="text-xs font-light">View</p>
-        <p class="text-xs font-light">Favorites</p>
-        <p class="text-xs font-light">Tools</p>
-        <p class="text-xs font-light">Help</p>
+        <!-- Back Button -->
+        <button
+          class="text-xs px-1 font-light inline-flex items-center active:bg-white h-full w-contain rounded-md"
+        >
+          <img
+            src={arrow_left}
+            alt="Back Button"
+            class="w-5 h-5 object-contain mr-1"
+          />
+          Back
+          <img
+            src={arrow_down}
+            alt="Expand"
+            class="w-2 h-2 object-contain mt-[2px] ml-1"
+          />
+        </button>
+        <!-- Forward Button -->
+        <button class="text-xs font-light inline-flex items-center">
+          <img
+            src={arrow_right}
+            alt="Back Button"
+            class="w-5 h-5 object-contain mr-1"
+          />
+          <img
+            src={arrow_down}
+            alt="Expand"
+            class="w-2 h-2 object-contain mt-[2px] ml-1"
+          />
+        </button>
+        <!-- Search Button -->
+        <button
+          class={` rounded-sm py-1 px-1 w-[72px] h-[37px] text-xs font-light inline-flex items-center ${isSearchPressed ? "bg-white border-[0.5px] border-black" : "bg-transparent"} `}
+          on:click={handleSearchClick}
+        >
+          <img
+            src={search}
+            alt="Back Button"
+            class="w-5 h-5 object-contain mr-1"
+          /> Search
+        </button>
       </div>
+    </div>
+    <!-- Main Content -->
+    <div
+      class="flex-grow flex flex-col w-full justify-items-center px-4 pt-2 pb-4 gap-2"
+    >
+      <!-- Folder Buttons -->
+      <button
+        class={`object-contain w-[170px] rounded-sm py-1 px-1 w-contain h-[37px] text-sm inline-flex items-center `}
+        on:click={handleFolderClick}
+      >
+        <img src={folder} alt="Folder" class={`w-10 h-10 object-contain`} />
+        <p
+          class={`${isFolderSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
+        >
+          About Me
+        </p>
+      </button>
+      <!-- Second folder button -->
+      <button
+        class={`object-contain w-[170px] rounded-sm py-1 px-1 w-contain h-[37px] text-sm inline-flex items-center `}
+        on:click={handleFolderClick}
+      >
+        <img src={folder} alt="Folder" class={`w-10 h-10 object-contain`} />
+        <p
+          class={`${isFolderSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
+        >
+          My Projects
+        </p>
+      </button>
     </div>
   </div>
 {/if}

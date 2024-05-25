@@ -5,16 +5,9 @@
   let hideValue;
 
   function handleClick() {
-    // show.update((currentValue) => !currentValue);
     hide.update((currentValue) => !currentValue);
-    hide.subscribe((value) => {
-      console.log("hide:", value);
-    });
-
-    show.subscribe((value) => {
-      console.log("show:", value);
-    });
   }
+  //Check the value of hide in order to condentionally render
   hide.subscribe((value) => {
     hideValue = value;
   });
