@@ -29,7 +29,7 @@
     class="w-full h-full object-cover"
   />
   <div
-    class="w-full absolute bottom-0 h-[5%] bg-gradient-to-b from-[#3168D5] to-[#4993E6] pt-[3px]"
+    class="w-full absolute bottom-0 h-[40px] bg-gradient-to-b from-[#3168D5] to-[#4993E6] pt-[3px]"
   >
     <div
       class="h-full w-full bg-gradient-to-b from-[#235CD9] to-[#2663E0]"
@@ -45,7 +45,7 @@
     </div>
   </div>
   <div
-    class="absolute bottom-0 right-0 h-[5%] w-24 bg-[#0F8EEA] flex items-center justify-end border-s-[1px]
+    class="absolute bottom-0 right-0 h-[40px] w-24 bg-[#0F8EEA] flex items-center justify-end border-s-[1px]
     border-black"
   >
     <p
