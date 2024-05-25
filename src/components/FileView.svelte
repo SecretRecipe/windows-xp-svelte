@@ -3,7 +3,7 @@
   import computer from "../assets/computer.png";
   import folder from "../assets/explorer.png";
   import { draggable } from "@neodrag/svelte";
-  import logo from "../assets/win_xp_logo.png";
+  import logo from "../assets/win_xp_logo.webp";
   import arrow_left from "../assets/arrow_left.svg";
   import arrow_down from "../assets/arrow_down.svg";
   import arrow_right from "../assets/arrow_right.svg";
@@ -13,8 +13,6 @@
   let isSearchPressed = false;
   let isFolderSelected = false;
   let isMaximized = false;
-  let offsetX = 0;
-  let offsetY = 0;
   let position = { x: 0, y: 0 };
   function handleMaximizeClick() {
     isMaximized = !isMaximized;

@@ -1,6 +1,6 @@
 <script>
   import windows_bg from "./assets/windows-xp-bg.jpeg";
-  import win_xp_logo from "./assets/win_xp_logo.png";
+  import win_xp_logo from "./assets/win_xp_logo.webp";
   import pc from "./assets/computer.png";
   import click_mp3 from "./assets/click_sound.mp3";
   import { Sound } from "svelte-sound";

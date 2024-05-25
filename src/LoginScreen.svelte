@@ -1,7 +1,6 @@
 <script>
-  import { push } from "svelte-spa-router";
   import TurnOff from "./assets/turn_off.svelte";
-  import windows_xp_logo from "./assets/win_xp_logo.png";
+  import windows_xp_logo from "./assets/win_xp_logo.webp";
   import prof_pic from "./assets/github_prof.png";
   import { navigate } from "svelte-routing";
   import { Sound } from "svelte-sound";
