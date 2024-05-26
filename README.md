@@ -7,7 +7,9 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 ## Features
 - Loading Screen: Booting screen with working animation.
 - Log In Screen: Includes a turning off functionality.
+![Log In Screen](https://drive.google.com/file/d/1qk51Cq1IiZJjd4Mjl8pui4zPrvFc1jXQ/view?usp=drive_link)
 - Interactive Windows: Drag, minimize, maximize application windows.
+! [Home Screen](https://drive.google.com/file/d/1qk51Cq1IiZJjd4Mjl8pui4zPrvFc1jXQ/view?usp=drive_link)
 - Desktop Icons: Open applications from desktop icons.
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
 
@@ -40,8 +42,8 @@ Start the development server:
 ```
 npm run dev
 ```
-License
+## License
 The Windows XP name, artwork, and trademark are properties of Microsoft. This project is provided for educational purposes only and is not affiliated with or approved by Microsoft.
 
-Acknowledgments
+## Acknowledgments
 Special thanks to the developers and designers whose work inspired this project.
