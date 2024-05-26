@@ -8,7 +8,8 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 - Loading Screen: Booting screen with working animation.
 - Log In Screen: Includes a turning off functionality.
 - Interactive Windows: Drag, minimize, maximize application windows.
-! [Home Screen](https://lh3.google.com/u/0/d/1qk51Cq1IiZJjd4Mjl8pui4zPrvFc1jXQ=w4014-h2492-iv2)
+https://drive.google.com/thumbnail?id=1qk51Cq1IiZJjd4Mjl8pui4zPrvFc1jXQ=w4014-h2492-iv2
+![Home Screen](https://lh3.google.com/u/0/d/1qk51Cq1IiZJjd4Mjl8pui4zPrvFc1jXQ=w4014-h2492-iv2)
 - Desktop Icons: Open applications from desktop icons.
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
 
