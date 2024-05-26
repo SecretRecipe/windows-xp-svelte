@@ -29,7 +29,7 @@
   <img
     src={windows_bg}
     alt="Windows Background"
-    class="w-full h-full object-cover"
+    class="w-full h-full object-cover pointer-events-none"
   />
   <!-- Footer -->
   <div

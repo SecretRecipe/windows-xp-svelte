@@ -9,9 +9,12 @@
   import arrow_right from "../assets/arrow_right.svg";
   import search from "../assets/search.png";
   import window from "../assets/window.svg";
-
+  import click_mp3 from "../assets/click_sound.mp3";
+  import { Sound, sound } from "svelte-sound";
+  const click_sound = new Sound(click_mp3);
   let isSearchPressed = false;
-  let isFolderSelected = false;
+  let isAboutSelected = false;
+  let isProjectSelected = false;
   let isMaximized = false;
   let position = { x: 0, y: 0 };
   function handleMaximizeClick() {
@@ -27,8 +30,25 @@
     isSearchPressed = !isSearchPressed;
     console.log(isSearchPressed);
   }
-  function handleFolderClick() {
-    isFolderSelected = !isFolderSelected;
+  function handleAboutClick(dbClick) {
+    if (dbClick === true) {
+      click_sound.play();
+      isAboutSelected = true;
+      isProjectSelected = false;
+    } else {
+      isAboutSelected = !isAboutSelected;
+      isProjectSelected = false;
+    }
+  }
+  function handleProjectClick(dbClick) {
+    if (dbClick === true) {
+      click_sound.play();
+      isAboutSelected = false;
+      isProjectSelected = true;
+    } else {
+      isAboutSelected = false;
+      isProjectSelected = !isProjectSelected;
+    }
   }
 </script>
 
@@ -147,11 +167,12 @@
       <!-- Folder Buttons -->
       <button
         class={`object-contain w-[170px] rounded-sm py-1 px-1 w-contain h-[37px] text-sm inline-flex items-center `}
-        on:click={handleFolderClick}
+        on:click={() => handleAboutClick(false)}
+        on:dblclick={() => handleAboutClick(true)}
       >
         <img src={folder} alt="Folder" class={`w-10 h-10 object-contain`} />
         <p
-          class={`${isFolderSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
+          class={`${isAboutSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
         >
           About Me
         </p>
@@ -159,11 +180,12 @@
       <!-- Second folder button -->
       <button
         class={`object-contain w-[170px] rounded-sm py-1 px-1 w-contain h-[37px] text-sm inline-flex items-center `}
-        on:click={handleFolderClick}
+        on:click={() => handleProjectClick(false)}
+        on:dblclick={() => handleProjectClick(true)}
       >
         <img src={folder} alt="Folder" class={`w-10 h-10 object-contain`} />
         <p
-          class={`${isFolderSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
+          class={`${isProjectSelected ? "bg-blue-400 text-white border-[1px] border-dotted border-white" : "bg-transparent"} mx-2`}
         >
           My Projects
         </p>
