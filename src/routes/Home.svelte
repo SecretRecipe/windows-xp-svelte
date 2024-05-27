@@ -7,7 +7,6 @@
   import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound } from "svelte-sound";
   import { show, hide, showStart } from "../stores";
-  import StartMenu from "../components/StartMenu.svelte";
   let clicked = false;
   const click_sound = new Sound(click_mp3);
 
@@ -18,9 +17,14 @@
   let clickedStartButton = false;
   let FileViewComponent = null;
   let FileExplorerBarComponent = null;
+  let StartMenuComponent = null;
 
   // Handle Start Button Click
-  function handleStart(event) {
+  async function handleStart(event) {
+    if (!StartMenuComponent) {
+      const module = await import("../components/StartMenu.svelte");
+      StartMenuComponent = module.default;
+    }
     clickedStartButton = true;
     showStart.update((value) => !value);
     event.stopPropagation(); // Prevent the click from propagating to the document
@@ -125,13 +129,13 @@
     </p>
   </div>
   <button
-    class="absolute top-10 left-5 w-22 h-12 flex flex-col justify-end items-center object-contain cursor-pointer"
+    class="absolute top-10 left-5 h-12 contain flex flex-col justify-center items-center object-contain cursor-pointer"
     on:click={handleClick}
     on:dblclick={doubleClick}
   >
-    <img src={pc} alt="My Computer" class="w-12 h-12" />
+    <img src={pc} alt="File Explorer" class="w-12 h-12" />
     <p
-      class={`w-full text-xs p-1 text-white ${clicked ? "bg-[#004E98]" : "bg-transparent"}`}
+      class={`w-full text-nowrap text-xs p-1 text-white ${clicked ? "bg-[#004E98]" : "bg-transparent"}`}
     >
       My Computer
     </p>
@@ -139,9 +143,9 @@
   {#if FileViewComponent}
     <svelte:component this={FileViewComponent} />
   {/if}
-  {#if $showStart}
+  {#if $showStart && StartMenuComponent}
     <div class="start-menu-wrapper">
-      <StartMenu />
+      <svelte:component this={StartMenuComponent} />
     </div>
   {/if}
 </div>

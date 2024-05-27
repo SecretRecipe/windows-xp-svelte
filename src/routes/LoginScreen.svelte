@@ -43,7 +43,7 @@
         />
         <div class="flex flex-col items-start ml-4">
           <h1 class="text-2xl font-semibold">Alex</h1>
-          <h3 class="font-thin mt-1">Logged On</h3>
+          <h2 class="font-thin mt-1">Logged On</h2>
         </div>
       </div></button
     >
