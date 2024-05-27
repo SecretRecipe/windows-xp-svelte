@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@neodrag/svelte": "^2.0.6",
-    "svelte-sound": "^0.6.0",
-    "svelte-spa-router": "^4.0.1"
+    "svelte-sound": "^0.6.0"
   }
 }

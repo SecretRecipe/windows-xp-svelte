@@ -1,10 +1,10 @@
 <script>
-  import Loading from "./Loading.svelte";
+  import Loading from "./routes/Loading.svelte";
   import { Router, Route } from "svelte-routing";
 
   // Use dynamic imports to lazy load components
-  const LoginScreen = () => import("./LoginScreen.svelte");
-  const Home = () => import("./Home.svelte");
+  const LoginScreen = () => import("./routes/LoginScreen.svelte");
+  const Home = () => import("./routes/Home.svelte");
 
   export let url = "";
 </script>

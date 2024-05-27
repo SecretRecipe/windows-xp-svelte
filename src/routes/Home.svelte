@@ -1,28 +1,46 @@
 <script>
-  import windows_bg from "./assets/windows-xp-bg.jpeg";
-  import win_xp_logo from "./assets/win_xp_logo.webp";
-  import pc from "./assets/computer.png";
-  import click_mp3 from "./assets/click_sound.mp3";
+  import { onMount } from "svelte";
+  import windows_bg from "../assets/windows-xp-bg.webp";
+  import win_xp_logo from "../assets/win_xp_logo.webp";
+  import pc from "../assets/computer.png";
+  import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound } from "svelte-sound";
-  import FileView from "./components/FileView.svelte";
-  import { show } from "./stores";
-  import { hide } from "./stores";
-  import FileExplorerBar from "./components/FileExplorerBar.svelte";
+  import { show } from "../stores";
+  import { hide } from "../stores";
+  import FileExplorerBar from "../components/FileExplorerBar.svelte";
+  import StartMenu from "../components/StartMenu.svelte";
   let clicked = false;
   const click_sound = new Sound(click_mp3);
 
   let time = new Date();
   $: hours = time.getHours();
-  $: minutes = time.getMinutes();
+  $: minutes = time.getMinutes().toString().padStart(2, "0");
 
+  let FileView = null;
+
+  // Handle Clicks
   function handleClick() {
     clicked = !clicked;
   }
-  function doubleClick() {
+
+  async function doubleClick() {
     click_sound.play();
-    hide.update((currentValue) => true);
-    show.update((currentValue) => true);
+    hide.update(() => true);
+    show.update(() => true);
+    if (!FileView) {
+      const module = await import("../components/FileView.svelte");
+      FileView = module.default;
+    }
   }
+
+  // Functions to update time
+  function updateTime() {
+    time = new Date();
+  }
+  onMount(() => {
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval); // Cleanup the interval on unmount
+  });
 </script>
 
 <div class="w-screen h-screen overflow-y-hidden">
@@ -78,7 +96,10 @@
       My Computer
     </p>
   </button>
-  <FileView />
+  {#if FileView}
+    <svelte:component this={FileView} />
+  {/if}
+  <StartMenu />
 </div>
 
 <style>

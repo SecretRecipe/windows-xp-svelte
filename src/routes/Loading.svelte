@@ -1,5 +1,5 @@
 <script>
-  import windows_logo from "./assets/windows_xp.png";
+  import windows_logo from "../assets/windows_xp.png";
   import { onMount } from "svelte";
   import { Router, Link, Route, navigate } from "svelte-routing";
   onMount(() => {

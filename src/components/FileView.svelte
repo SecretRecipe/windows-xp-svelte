@@ -9,7 +9,7 @@
   import arrow_right from "../assets/arrow_right.svg";
   import search from "../assets/search.png";
   import window from "../assets/window.svg";
-  import click_mp3 from "../assets/click_sound.mp3";
+  import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound, sound } from "svelte-sound";
   const click_sound = new Sound(click_mp3);
   let isSearchPressed = false;

@@ -1,10 +1,10 @@
 <script>
-  import TurnOff from "./assets/turn_off.svelte";
-  import windows_xp_logo from "./assets/win_xp_logo.webp";
-  import prof_pic from "./assets/github_prof.png";
+  import TurnOff from "../assets/turn_off.svelte";
+  import windows_xp_logo from "../assets/win_xp_logo.webp";
+  import prof_pic from "../assets/github_prof.png";
   import { navigate } from "svelte-routing";
   import { Sound } from "svelte-sound";
-  import startup_mp3 from "./assets/startup_sound.mp3";
+  import startup_mp3 from "../assets/sounds/startup_sound.mp3";
   const startup_sound = new Sound(startup_mp3);
   function navigateHome() {
     startup_sound.play();
