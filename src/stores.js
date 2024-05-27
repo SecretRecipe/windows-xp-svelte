@@ -5,3 +5,5 @@ import { writable } from "svelte/store";
 export const show = writable(false);
 
 export const hide = writable(true);
+
+export let showStart = writable(false);
