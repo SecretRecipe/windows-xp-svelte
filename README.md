@@ -9,7 +9,7 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 ![Loading](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Loading.jpg)
 - Log In Screen: Includes a turning off functionality.
 ![Log In Screen](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/LogIn%20Image.png?raw=true)
-- Interactive Windows: Drag, minimize, maximize application windows.
+- Interactive Windows: Drag, resize, minimize, maximize application windows.
 - Desktop Icons: Open applications from desktop icons.
 ![Home Screen](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Home%20Image.png?raw=true)
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
@@ -17,7 +17,6 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 
 ### Pending Features
 - Improvements on the File Explorer application.
-- Resizable application windows.
 - Deploy on GitHub Pages.
 - Creation of an email application.
 
