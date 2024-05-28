@@ -30,7 +30,7 @@
       <!-- Top Div -->
       <div class="flex flex-row ml-2 h-[90%] mt-[2px] items-center gap-2">
         <!-- User Logo div -->
-        <div class="w-14 border-white border-[1px] rounded-md">
+        <div class="w-14 border-white border-[1px] rounded-md my-2">
           <img src={userImg} alt="User" class="h-full w-14" />
         </div>
         <p class="text-white text-lg">Alex</p>
@@ -46,7 +46,7 @@
           <img src={outlook} alt="Email" class="h-16 w-16" />
           <div class="">
             <p class="text-sm text-start">Outlook</p>
-            <p class="text-xs font-extralight">Email Application</p>
+            <p class="text-xs font-extralight text-start">Email Application</p>
           </div>
         </button>
         <!-- Computer Button -->
@@ -54,10 +54,10 @@
           class="flex flex-row items-center hover:bg-[#3168D5] hover:text-white"
           on:click={handleClick}
         >
-          <img src={computer} alt="Email" class="h-8 w-8" />
+          <img src={computer} alt="Email" class="h-8 w-8 ml-3" />
           <div class="ml-2">
             <p class="text-sm text-start">My Computer</p>
-            <p class="text-xs font-extralight">View my info</p>
+            <p class="text-xs font-extralight text-start">View my info</p>
           </div>
         </button>
       </div>

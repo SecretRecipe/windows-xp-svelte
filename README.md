@@ -1,4 +1,4 @@
- Windows XP - Svelte
+# Windows XP - Svelte
 A Windows XP desktop recreation for personal portfolio purposes.
 
 ## Introduction

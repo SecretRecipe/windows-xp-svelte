@@ -11,11 +11,13 @@
   import window from "../assets/window.svg";
   import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound, sound } from "svelte-sound";
+  import { resize } from "@svelte-put/resize";
   const click_sound = new Sound(click_mp3);
   let isSearchPressed = false;
   let isAboutSelected = false;
   let isProjectSelected = false;
   let isMaximized = false;
+  let enabled = true;
   let position = { x: 0, y: 0 };
   function handleMaximizeClick() {
     isMaximized = !isMaximized;
@@ -61,13 +63,13 @@
       onDrag: ({ offsetX, offsetY }) => {
         position = { x: offsetX, y: offsetY };
       },
+      handle: ".handle",
     }}
-    class={`absolute  ${isMaximized ? "top-0 left-0 w-full h-full" : "top-[20%] left-[25%] w-[40%] h-[50%]"} bg-white border-4 border-[#235CD9]
+    use:resize={{ enabled }}
+    class={`absolute resize overflow-auto max-h-[100%] max-w-[100%] ${isMaximized ? "top-0 left-0 w-full h-full" : "top-[20%] left-[25%] w-contain h-[50%]"} bg-white border-4 border-[#235CD9]
   rounded-t-lg flex flex-col`}
   >
-    <div
-      class="relative flex flex-row bg-gradient-to-b from-[#235CD9] to-[#2663E0] text-white text-sm h-7 justify-between"
-    >
+    <div class="handle">
       <!-- Blue Ribbon  -->
       <div class="flex flex-row items-center ml-2">
         <img src={computer} alt="My Computer" class="w-6 h-6" />
@@ -100,12 +102,35 @@
       class="w-full h-6 bg-[#EFECDE] flex flex-row justify-between border-b-[1px] border-[#E3DECB]"
     >
       <div class="h-full ml-2 flex flex-row items-center gap-2">
-        <p class="text-xs font-light">File</p>
-        <p class="text-xs font-light">Edit</p>
-        <p class="text-xs font-light">View</p>
-        <p class="text-xs font-light">Favorites</p>
-        <p class="text-xs font-light">Tools</p>
-        <p class="text-xs font-light">Help</p>
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+          >File</button
+        >
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+        >
+          Edit
+        </button>
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+        >
+          View
+        </button>
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+        >
+          Favorites
+        </button>
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+        >
+          Tools
+        </button>
+        <button
+          class="text-xs font-light hover:bg-[#3168D5] px-2 h-[95%] hover:text-white"
+        >
+          Help
+        </button>
       </div>
       <div
         class="h-full w-8 bg-white border-s-[1px] border-b-[1px] border-[#E3DECB]"
@@ -135,7 +160,9 @@
           />
         </button>
         <!-- Forward Button -->
-        <button class="text-xs font-light inline-flex items-center">
+        <button
+          class="text-xs font-light inline-flex items-center active:bg-white h-full w-contai px-1 rounded-md"
+        >
           <img
             src={arrow_right}
             alt="Back Button"
@@ -218,5 +245,15 @@
   }
   .styled-button-blue:hover {
     background: linear-gradient(to bottom right, #94b2f9, #5174c6);
+  }
+  .handle {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(to bottom, #235cd9, #2663e0);
+    color: white;
+    font-size: 0.875rem; /* Equivalent to 14px */
+    height: 1.75rem; /* Equivalent to 28px */
+    justify-content: space-between;
   }
 </style>
