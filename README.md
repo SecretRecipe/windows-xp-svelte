@@ -14,6 +14,7 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 ![Home Screen](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Home%20Image.png?raw=true)
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
 - Functional Start menu with option to log off or "shut down".
+- Optimized for speed implementing Lazy Loading techniques and code splitting.
 
 ### Pending Features
 - Improvements on the File Explorer application.
