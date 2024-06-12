@@ -1,6 +1,6 @@
 <script>
   import { hide, show } from "../stores";
-  import pc from "../assets/computer.png";
+  import pc from "../assets/computer.webp";
 
   let hideValue;
 

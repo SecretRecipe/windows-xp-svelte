@@ -1,6 +1,6 @@
 <script>
   import { show, hide } from "../stores";
-  import computer from "../assets/computer.png";
+  import computer from "../assets/computer.webp";
   import folder from "../assets/explorer.png";
   import { draggable } from "@neodrag/svelte";
   import logo from "../assets/win_xp_logo.webp";
@@ -21,14 +21,26 @@
   let isAboutSelected = false;
   let isProjectSelected = false;
   let isMaximized = false;
+  let storedHeight;
+  let storedWidth;
   let enabled = true;
   let lastAddress = "";
   let position = { x: 0, y: 0 };
 
   function handleMaximizeClick() {
-    isMaximized = !isMaximized;
-    position.x = 0;
-    position.y = 0;
+    if (!isMaximized) {
+      position.x = 0;
+      position.y = 0;
+      storedWidth = document.getElementById("myContainer").style.width;
+      storedHeight = document.getElementById("myContainer").style.height;
+      document.getElementById("myContainer").style.width = "100%";
+      document.getElementById("myContainer").style.height = "100%";
+      isMaximized = !isMaximized;
+    } else {
+      document.getElementById("myContainer").style.width = storedWidth;
+      document.getElementById("myContainer").style.height = storedHeight;
+      isMaximized = !isMaximized;
+    }
   }
 
   function handleClick() {
@@ -92,6 +104,7 @@
 <!-- Show this DIV if user has double clicked on the Computer -->
 {#if $show && $hide}
   <div
+    id="myContainer"
     use:draggable={{
       bounds: "body",
       position,

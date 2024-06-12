@@ -14,12 +14,12 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 ![Home Screen](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Home%20Image.png?raw=true)
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
 - Functional Start menu with option to log off or "shut down".
-- Optimized for speed implementing Lazy Loading techniques and code splitting.
+- Optimized for speed implementing Lazy Loading techniques and code splitting (speed index over 90 on Lighthouse for every route).
 
 ### Pending Features
-- Improvements on the File Explorer application.
-- Deploy on GitHub Pages.
+- Drop down menu on File Explorer application.
 - Creation of an email application.
+- Deploy on GitHub Pages.
 
 ## Usage
 This project will be used alongside the "About Me" project, which utilizes ReactJS and ThreeJS.
@@ -29,7 +29,7 @@ To run this project locally:
 
 Clone the repository:
 ```
-git clone https://github.com/yourusername/windows-xp-svelte.git
+git clone https://github.com/AJevangelou/windows-xp-svelte.git
 ```
 Navigate to the project directory:
 ```

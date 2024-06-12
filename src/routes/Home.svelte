@@ -3,11 +3,13 @@
   import { get } from "svelte/store";
   import windows_bg from "../assets/windows-xp-bg.webp";
   import win_xp_logo from "../assets/win_xp_logo.webp";
-  import pc from "../assets/computer.png";
+  import pc from "../assets/computer.webp";
   import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound } from "svelte-sound";
-  import { show, hide, showStart } from "../stores";
+  import { show, hide, showStart, showOutlook, hideOutlook } from "../stores";
+  import outlook from "../assets/outlook.png";
   let clicked = false;
+  let clickedOutlook = false;
   const click_sound = new Sound(click_mp3);
 
   let time = new Date();
@@ -16,6 +18,7 @@
 
   let clickedStartButton = false;
   let FileViewComponent = null;
+  let OutlookComponent = null;
   let FileExplorerBarComponent = null;
   let StartMenuComponent = null;
 
@@ -33,17 +36,45 @@
   // Handle My Computer Icon Click
   function handleClick() {
     clicked = !clicked;
+    clickedOutlook = false;
   }
 
+  // Handle Outlook Icon Click
+  function handleOutlookClick() {
+    clickedOutlook = !clickedOutlook;
+    clicked = false;
+    console.log("Clicked outlook");
+  }
   // Handle My Computer Icon Double Click
   async function doubleClick() {
+    OutlookComponent = null;
     click_sound.play();
+
     hide.update(() => true);
     show.update(() => true);
 
-    if (!FileViewComponent) {
+    if (!OutlookComponent) {
       const module = await import("../components/FileView.svelte");
       FileViewComponent = module.default;
+    }
+
+    if (!FileExplorerBarComponent) {
+      const module = await import("../components/FileExplorerBar.svelte");
+      FileExplorerBarComponent = module.default;
+    }
+  }
+
+  // Handle Outlook Icon Double Click
+  async function doubleClickOutlook() {
+    FileViewComponent = null;
+    console.log("Double Clicked outlook");
+    click_sound.play();
+    hideOutlook.update(() => true);
+    showOutlook.update(() => true);
+
+    if (!FileViewComponent) {
+      const module = await import("../components/Outlook.svelte");
+      OutlookComponent = module.default;
     }
 
     if (!FileExplorerBarComponent) {
@@ -128,21 +159,43 @@
       {hours}:{minutes}
     </p>
   </div>
-  <button
-    class="absolute top-10 left-5 h-12 contain flex flex-col justify-center items-center object-contain cursor-pointer"
-    on:click={handleClick}
-    on:dblclick={doubleClick}
+  <div
+    class="absolute top-24 left-5 h-12 contain flex flex-col justify-center items-center object-contain"
   >
-    <img src={pc} alt="File Explorer" class="w-12 h-12" />
-    <p
-      class={`w-full text-nowrap text-xs p-1 text-white ${clicked ? "bg-[#004E98]" : "bg-transparent"}`}
+    <button
+      class="contain flex flex-col justify-center items-center object-contain cursor-pointer py-6"
+      on:click={handleClick}
+      on:dblclick={doubleClick}
     >
-      My Computer
-    </p>
-  </button>
+      <img src={pc} alt="File Explorer" class="w-12 h-12" />
+      <p
+        class={`w-full text-nowrap text-xs p-1 text-white ${clicked ? "bg-[#004E98]" : "bg-transparent"}`}
+      >
+        My Computer
+      </p>
+    </button>
+    <button
+      class="contain flex flex-col justify-center items-center object-contain cursor-pointer"
+      on:click={handleOutlookClick}
+      on:dblclick={doubleClickOutlook}
+    >
+      <img src={outlook} alt="Email me" class="w-12 h-12 bg-cover" />
+      <p
+        class={` w-full text-nowrap text-xs text-white ${clickedOutlook ? "bg-[#004E98]" : "bg-transparent"}`}
+      >
+        Outlook
+      </p>
+    </button>
+  </div>
+  <!-- Render conditionally File View Component -->
   {#if FileViewComponent}
     <svelte:component this={FileViewComponent} />
   {/if}
+  <!-- Render conditionally Outlook Component -->
+  {#if OutlookComponent}
+    <svelte:component this={OutlookComponent} />
+  {/if}
+  <!-- Render conditionally Outlook Component -->
   {#if $showStart && StartMenuComponent}
     <div class="start-menu-wrapper">
       <svelte:component this={StartMenuComponent} />

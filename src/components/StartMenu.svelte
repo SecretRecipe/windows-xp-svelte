@@ -4,16 +4,30 @@
   import { navigate } from "svelte-routing";
   import key from "../assets/key.svg";
   import outlook from "../assets/outlook.png";
-  import computer from "../assets/computer.png";
-  import { showStart, hide, show } from "../stores";
+  import computer from "../assets/computer.webp";
+  import { showStart, hide, show, hideOutlook, showOutlook } from "../stores";
 
   let FileView = null;
+  let OutlookView = null;
+  //Handle Computer Click
   async function handleClick() {
+    OutlookView = null;
     hide.update(() => true);
     show.update(() => true);
     if (!FileView) {
       const module = await import("../components/FileView.svelte");
       FileView = module.default;
+    }
+    showStart.update((value) => false);
+  }
+  //Handle Outlook Click
+  async function handleOutlookClick() {
+    FileView = null;
+    hideOutlook.update(() => true);
+    showOutlook.update(() => true);
+    if (!OutlookView) {
+      const module = await import("../components/Outlook.svelte");
+      OutlookView = module.default;
     }
     showStart.update((value) => false);
   }
@@ -41,9 +55,10 @@
       <div class="grid grid-cols-2 w-full h-16">
         <!-- Email Button -->
         <button
-          class="flex flex-row items-center hover:bg-[#3168D5] hover:text-white"
+          class="flex flex-row items-center pl-2 hover:bg-[#3168D5] hover:text-white"
+          on:click={handleOutlookClick}
         >
-          <img src={outlook} alt="Email" class="h-16 w-16" />
+          <img src={outlook} alt="Email" class="h-8 w-8" />
           <div class="">
             <p class="text-sm text-start">Outlook</p>
             <p class="text-xs font-extralight text-start">Email Application</p>

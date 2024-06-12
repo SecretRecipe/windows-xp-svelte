@@ -29,15 +29,15 @@
       </div>
     </button>
   </div>
-  <h2 class="text-center text-lg underline pt-4">
-    Computer Vision & Machine Learning
-  </h2>
+  <h2 class="text-center text-lg underline pt-4">Frontend Development</h2>
   <!-- Add your project details here -->
   <div class="grid gap-4 grid-cols-2 place-items-center pt-2">
     {#each frontend_projects as project}
-      <button
+      <a
+        href={project.href}
         class="w-[200px] h-[245px] bg-[#3168D5] rounded-md flex justify-center hover:scale-105"
-        on:click={() => console.log("Hello there!")}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <div class="items-center flex flex-col text-white">
           <img
@@ -51,7 +51,7 @@
             {project.description}
           </p>
         </div>
-      </button>
+      </a>
     {/each}
   </div>
 </div>
