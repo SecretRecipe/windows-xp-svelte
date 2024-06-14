@@ -15,10 +15,10 @@ This project aims to recreate the look and feel of the classic Windows XP deskto
 - Sound Effects: Windows XP sounds implemented for logging in and clicking on applications.
 - Functional Start menu with option to log off or "shut down".
 - Optimized for speed implementing Lazy Loading techniques and code splitting (speed index over 90 on Lighthouse for every route).
-![Outlook](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/File%20Explorer.png?raw=true)
+![Outlook](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Outlook.png?raw=true)
 - Working Outlook application used for reaching out to me.
 - You can drag, resize, minimize or maximize the application window.
-![File Explorer](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/Outlook.png?raw=true)
+![File Explorer](https://github.com/AJevangelou/windows-xp-svelte/blob/main/thumbnails/File%20Explorer.png?raw=true)
 - File explorer application used to showcase my info and my projects.
 - You can drag, resize, minimize or maximize the application window.
 
