@@ -185,7 +185,7 @@
     </div>
     <!-- From, To and Subject -->
     <form
-      class="w-full pl-4 pr-2 text-xs font-light flex flex-row items-center h-8 bg-[#EFECDE] justify-between"
+      class="w-full pl-4 pr-2 py-2 text-xs font-light flex flex-row items-center h-8 bg-[#EFECDE] justify-between"
     >
       <label for="from_address" class="w-14">From: </label>
       <input
@@ -210,7 +210,7 @@
     </form>
     <!-- TODO: Fix this -->
     <form
-      class=" w-full pl-4 pr-2 text-xs font-light flex flex-row items-center h-8 bg-[#EFECDE] justify-between border-b-[1px] border-[#E3DECB]"
+      class=" w-full pl-4 pr-2 py-2 text-xs font-light flex flex-row items-center h-8 bg-[#EFECDE] justify-between border-b-[1px] border-[#E3DECB]"
     >
       <label for="from_address" class="w-14">Subject: </label>
       <input
@@ -224,7 +224,7 @@
     </form>
     <!-- Textarea for email body -->
     <textarea
-      class="w-full h-[180px] border-b-2 border-[#EFECDE] focus:outline-none p-2 resize-none text-sm"
+      class="w-full h-[180px] border-b-2 border-[#EFECDE] focus:outline-none p-4 resize-none text-sm"
       placeholder="Type your message here..."
       bind:value={form.message}
       required

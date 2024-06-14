@@ -116,6 +116,16 @@
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   });
+  $: if ($show && !FileViewComponent) {
+    import("../components/FileView.svelte").then((module) => {
+      FileViewComponent = module.default;
+    });
+  }
+  $: if ($showOutlook && !OutlookComponent) {
+    import("../components/Outlook.svelte").then((module) => {
+      OutlookComponent = module.default;
+    });
+  }
 </script>
 
 <div class="w-screen h-screen overflow-y-hidden">
