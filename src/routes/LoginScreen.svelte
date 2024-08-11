@@ -21,9 +21,9 @@
     <!-- LEFT SIDE -->
     <div class="logo relative">
       <div>
-        <p class="top">Microsoft</p>
+        <p class="top">Megahard</p>
         <p class="mid">Windows<span class="span">XP</span></p>
-        <p class="bottom">Professional</p>
+        <p class="bottom">DerpFi Edtion</p>
       </div>
       <img
         src={windows_xp_logo}
