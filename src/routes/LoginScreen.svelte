@@ -42,7 +42,7 @@
           class="h-24 w-24 rounded-lg border-2 border-yellow-300"
         />
         <div class="flex flex-col items-start ml-4">
-          <h1 class="text-2xl font-semibold">Alex</h1>
+          <h1 class="text-2xl font-semibold">DerpFi</h1>
           <h2 class="font-thin mt-1">Logged On</h2>
         </div>
       </div></button
