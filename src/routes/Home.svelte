@@ -21,7 +21,7 @@
   let StartMenuComponent = null;
 
   let showWelcomeDialog = true; // Control visibility of the welcome dialog
-  let gifPath = './astro.gif'; // Path to the GIF in the same folder
+  let gifPath = '/astro.gif'; // Path to the GIF in the same folder
 
   async function handleStart(event) {
     if (!StartMenuComponent) {
