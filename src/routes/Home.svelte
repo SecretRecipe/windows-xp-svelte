@@ -1,14 +1,13 @@
 <script>
   import { onMount } from "svelte";
-  import { get } from "svelte/store";
+  import WelcomeDialog from './WelcomeDialog.svelte'; // Import the dialog component
   import windows_bg from "../assets/windows-xp-bg.webp";
   import win_xp_logo from "../assets/win_xp_logo.webp";
   import pc from "../assets/computer.webp";
   import click_mp3 from "../assets/sounds/click_sound.mp3";
   import { Sound } from "svelte-sound";
-  import { show, hide, showStart, showOutlook, hideOutlook } from "../stores";
+  import { showStart } from "../stores";
   import outlook from "../assets/outlook.png";
-  import WelcomeDialog from './WelcomeDialog.svelte'; // Import the dialog component
 
   let clicked = false;
   let clickedOutlook = false;
@@ -19,15 +18,11 @@
   $: minutes = time.getMinutes().toString().padStart(2, "0");
 
   let clickedStartButton = false;
-  let FileViewComponent = null;
-  let OutlookComponent = null;
-  let FileExplorerBarComponent = null;
   let StartMenuComponent = null;
 
   let showWelcomeDialog = true; // Control visibility of the welcome dialog
-  let gifPath = 'astro.gif'; // Replace with your GIF path
+  let gifPath = './astro.gif'; // Path to the GIF in the same folder
 
-  // Handle Start Button Click
   async function handleStart(event) {
     if (!StartMenuComponent) {
       const module = await import("../components/StartMenu.svelte");
@@ -35,83 +30,34 @@
     }
     clickedStartButton = true;
     showStart.update((value) => !value);
-    event.stopPropagation(); // Prevent the click from propagating to the document
+    event.stopPropagation();
   }
 
-  // Handle My Computer Icon Click
   function handleClick() {
     clicked = !clicked;
     clickedOutlook = false;
   }
 
-  // Handle Outlook Icon Click
   function handleOutlookClick() {
     clickedOutlook = !clickedOutlook;
     clicked = false;
-    console.log("Clicked outlook");
-  }
-  // Handle My Computer Icon Double Click
-  async function doubleClick() {
-    OutlookComponent = null;
-    click_sound.play();
-
-    hide.update(() => true);
-    show.update(() => true);
-
-    if (!OutlookComponent) {
-      const module = await import("../components/FileView.svelte");
-      FileViewComponent = module.default;
-    }
-
-    if (!FileExplorerBarComponent) {
-      const module = await import("../components/FileExplorerBar.svelte");
-      FileExplorerBarComponent = module.default;
-    }
   }
 
-  // Handle Outlook Icon Double Click
-  async function doubleClickOutlook() {
-    FileViewComponent = null;
-    console.log("Double Clicked outlook");
-    click_sound.play();
-    hideOutlook.update(() => true);
-    showOutlook.update(() => true);
-
-    if (!FileViewComponent) {
-      const module = await import("../components/Outlook.svelte");
-      OutlookComponent = module.default;
-    }
-
-    if (!FileExplorerBarComponent) {
-      const module = await import("../components/FileExplorerBar.svelte");
-      FileExplorerBarComponent = module.default;
-    }
-  }
-
-  // Update Time Function
   function updateTime() {
     time = new Date();
   }
 
-  // Handle Outside Click
   function handleOutsideClick(event) {
     const startMenu = document.querySelector(".start-menu-wrapper");
     const startButton = document.querySelector(".start-button");
 
-    if (
-      startMenu &&
-      !startMenu.contains(event.target) &&
-      startButton &&
-      !startButton.contains(event.target) &&
-      get(showStart)
-    ) {
+    if (startMenu && !startMenu.contains(event.target) && startButton && !startButton.contains(event.target)) {
       showStart.set(false);
     }
 
-    clickedStartButton = false; // Reset the flag after handling the outside click
+    clickedStartButton = false;
   }
 
-  // Mount and Cleanup Functions
   onMount(() => {
     const interval = setInterval(updateTime, 1000);
     document.addEventListener("mousedown", handleOutsideClick);
@@ -121,18 +67,6 @@
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   });
-
-  $: if ($show && !FileViewComponent) {
-    import("../components/FileView.svelte").then((module) => {
-      FileViewComponent = module.default;
-    });
-  }
-
-  $: if ($showOutlook && !OutlookComponent) {
-    import("../components/Outlook.svelte").then((module) => {
-      OutlookComponent = module.default;
-    });
-  }
 </script>
 
 <div class="w-screen h-screen overflow-y-hidden">
@@ -162,9 +96,6 @@
           start
         </button>
       </div>
-      {#if FileExplorerBarComponent}
-        <svelte:component this={FileExplorerBarComponent} />
-      {/if}
     </div>
   </div>
   <div
@@ -182,7 +113,6 @@
     <button
       class="contain flex flex-col justify-center items-center object-contain cursor-pointer py-6"
       on:click={handleClick}
-      on:dblclick={doubleClick}
     >
       <img src={pc} alt="PC Icon" class="w-20 h-20" />
       <p class="text-white text-xs">My Computer</p>
@@ -190,18 +120,11 @@
     <button
       class="contain flex flex-col justify-center items-center object-contain cursor-pointer py-6"
       on:click={handleOutlookClick}
-      on:dblclick={doubleClickOutlook}
     >
       <img src={outlook} alt="Outlook Icon" class="w-20 h-20" />
       <p class="text-white text-xs">Outlook</p>
     </button>
   </div>
-  {#if FileViewComponent}
-    <svelte:component this={FileViewComponent} />
-  {/if}
-  {#if OutlookComponent}
-    <svelte:component this={OutlookComponent} />
-  {/if}
   {#if StartMenuComponent}
     <svelte:component this={StartMenuComponent} />
   {/if}
@@ -209,3 +132,20 @@
     <WelcomeDialog visible={showWelcomeDialog} gifSrc={gifPath} />
   {/if}
 </div>
+
+<style>
+  .styled-div {
+    width: 110px;
+    height: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom right, #337634, #48ac48);
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 0.45rem;
+    transition: background 0.3s;
+  }
+  .styled-div:hover {
+    background: linear-gradient(to bottom right, #48ac48, #6fd16f);
+  }
+</style>
