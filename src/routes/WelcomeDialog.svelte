@@ -1,6 +1,6 @@
 <script>
   export let visible = false;
-  export let gifSrc = "/astro.gif"; // Path to the GIF
+  export let gifSrc = "./astro.gif"; // Path to the GIF
 
   function closeDialog() {
     visible = false;
