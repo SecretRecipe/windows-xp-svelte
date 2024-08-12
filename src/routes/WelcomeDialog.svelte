@@ -1,6 +1,6 @@
 <script>
+  import astroGif from './astro.gif';
   export let visible = false;
-  export let gifSrc = "/astro.gif"; // Path to the GIF
 
   function closeDialog() {
     visible = false;
@@ -15,7 +15,7 @@
         <button class="close-button" on:click={closeDialog}>X</button>
       </div>
       <div class="dialog-content">
-        <img src={gifSrc} alt="Welcome GIF" class="welcome-gif" />
+        <img src={astroGif} alt="Welcome GIF" class="welcome-gif" />
         <p>Welcome to DerpFi</p>
       </div>
       <div class="dialog-footer">
