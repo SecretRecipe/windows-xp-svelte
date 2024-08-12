@@ -8,7 +8,7 @@
   import { Sound } from "svelte-sound";
   import { show, hide, showStart, showOutlook, hideOutlook } from "../stores";
   import outlook from "../assets/outlook.png";
-  import WelcomeDialog from "../components/WelcomeDialog.svelte"; // Import the dialog component
+  import WelcomeDialog from "../routes/WelcomeDialog.svelte"; // Corrected import path
 
   let clicked = false;
   let clickedOutlook = false;
