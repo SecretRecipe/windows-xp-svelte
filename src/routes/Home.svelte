@@ -8,7 +8,7 @@
   import { Sound } from "svelte-sound";
   import { show, hide, showStart, showOutlook, hideOutlook } from "../stores";
   import outlook from "../assets/outlook.png";
-  import WelcomeDialog from "../routes/WelcomeDialog.svelte"; // Corrected import path
+  import WelcomeDialog from './WelcomeDialog.svelte'; // Import the dialog component
 
   let clicked = false;
   let clickedOutlook = false;
@@ -24,7 +24,8 @@
   let FileExplorerBarComponent = null;
   let StartMenuComponent = null;
 
-  let showWelcomeDialog = true; // Control dialog visibility
+  let showWelcomeDialog = true; // Control visibility of the welcome dialog
+  let gifPath = '/path/to/your/gif.gif'; // Replace with your GIF path
 
   // Handle Start Button Click
   async function handleStart(event) {
@@ -49,7 +50,6 @@
     clicked = false;
     console.log("Clicked outlook");
   }
-
   // Handle My Computer Icon Double Click
   async function doubleClick() {
     OutlookComponent = null;
@@ -121,11 +121,13 @@
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   });
+
   $: if ($show && !FileViewComponent) {
     import("../components/FileView.svelte").then((module) => {
       FileViewComponent = module.default;
     });
   }
+
   $: if ($showOutlook && !OutlookComponent) {
     import("../components/Outlook.svelte").then((module) => {
       OutlookComponent = module.default;
@@ -182,57 +184,28 @@
       on:click={handleClick}
       on:dblclick={doubleClick}
     >
-      <img src={pc} alt="File Explorer" class="w-12 h-12" />
-      <p
-        class={`w-full text-nowrap text-xs p-1 text-white ${clicked ? "bg-[#004E98]" : "bg-transparent"}`}
-      >
-        My Computer
-      </p>
+      <img src={pc} alt="PC Icon" class="w-20 h-20" />
+      <p class="text-white text-xs">My Computer</p>
     </button>
     <button
-      class="contain flex flex-col justify-center items-center object-contain cursor-pointer"
+      class="contain flex flex-col justify-center items-center object-contain cursor-pointer py-6"
       on:click={handleOutlookClick}
       on:dblclick={doubleClickOutlook}
     >
-      <img src={outlook} alt="Email me" class="w-12 h-12 bg-cover" />
-      <p
-        class={` w-full text-nowrap text-xs text-white ${clickedOutlook ? "bg-[#004E98]" : "bg-transparent"}`}
-      >
-        Outlook
-      </p>
+      <img src={outlook} alt="Outlook Icon" class="w-20 h-20" />
+      <p class="text-white text-xs">Outlook</p>
     </button>
   </div>
-  <!-- Render conditionally File View Component -->
   {#if FileViewComponent}
     <svelte:component this={FileViewComponent} />
   {/if}
-  <!-- Render conditionally Outlook Component -->
   {#if OutlookComponent}
     <svelte:component this={OutlookComponent} />
   {/if}
-  <!-- Render conditionally Start Menu Component -->
-  {#if $showStart && StartMenuComponent}
-    <div class="start-menu-wrapper">
-      <svelte:component this={StartMenuComponent} />
-    </div>
+  {#if StartMenuComponent}
+    <svelte:component this={StartMenuComponent} />
   {/if}
-  <!-- Add the Welcome Dialog -->
-  <WelcomeDialog visible={showWelcomeDialog} />
+  {#if showWelcomeDialog}
+    <WelcomeDialog visible={showWelcomeDialog} gifSrc={gifPath} />
+  {/if}
 </div>
-
-<style>
-  .styled-div {
-    width: 110px;
-    height: 100%;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(to bottom right, #337634, #48ac48);
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 0.45rem;
-    transition: background 0.3s;
-  }
-  .styled-div:hover {
-    background: linear-gradient(to bottom right, #48ac48, #6fd16f);
-  }
-</style>
